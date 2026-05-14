@@ -244,127 +244,125 @@ export default function Dashboard() {
 
       {
 
-        Object.entries(groupedLeads).map(
+        Object.entries(
+          groupedLeads as Record<string, any[]>
+        ).map(([date, dayLeads]) => (
 
-          ([date, dayLeads]) => (
+          <div
+            key={date}
+            className='mb-12'
+          >
 
-            <div
-              key={date}
-              className='mb-12'
-            >
+            {/* DATE HEADER */}
 
-              {/* DATE HEADER */}
+            <div className='flex items-center justify-between mb-6'>
 
-              <div className='flex items-center justify-between mb-6'>
+              <h2 className='text-3xl font-bold'>
+                📅 {date}
+              </h2>
 
-                <h2 className='text-3xl font-bold'>
-                  📅 {date}
-                </h2>
-
-                <div className='bg-blue-600 px-5 py-2 rounded-full text-sm font-semibold'>
-                  {dayLeads.length} Leads
-                </div>
-
+              <div className='bg-blue-600 px-5 py-2 rounded-full text-sm font-semibold'>
+                {dayLeads.length} Leads
               </div>
 
-              {/* LEADS */}
+            </div>
 
-              <div className='grid gap-6'>
+            {/* LEADS */}
 
-                {dayLeads.map((lead) => (
+            <div className='grid gap-6'>
 
-                  <div
-                    key={lead.id}
-                    className='bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/10 transition-all'
-                  >
+              {dayLeads.map((lead) => (
 
-                    <div className='grid lg:grid-cols-2 gap-6'>
+                <div
+                  key={lead.id}
+                  className='bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/10 transition-all'
+                >
 
-                      {/* LEFT */}
+                  <div className='grid lg:grid-cols-2 gap-6'>
 
-                      <div>
+                    {/* LEFT */}
 
-                        <h2 className='text-3xl font-bold'>
-                          {lead.business_name}
-                        </h2>
+                    <div>
 
-                        <div className='space-y-3 mt-5 text-gray-300'>
+                      <h2 className='text-3xl font-bold'>
+                        {lead.business_name}
+                      </h2>
 
-                          <p>
-                            👤 {lead.name}
-                          </p>
+                      <div className='space-y-3 mt-5 text-gray-300'>
 
-                          <p>
-                            📞 {lead.phone}
-                          </p>
+                        <p>
+                          👤 {lead.name}
+                        </p>
 
-                          <p>
-                            📧 {lead.email}
-                          </p>
+                        <p>
+                          📞 {lead.phone}
+                        </p>
 
-                          <p>
-                            🌐 {lead.website}
-                          </p>
+                        <p>
+                          📧 {lead.email}
+                        </p>
 
-                          <p>
-                            🎯 {lead.service}
-                          </p>
+                        <p>
+                          🌐 {lead.website}
+                        </p>
 
-                          <p>
-                            💰 {lead.budget}
-                          </p>
+                        <p>
+                          🎯 {lead.service}
+                        </p>
 
-                        </div>
-
-                      </div>
-
-                      {/* RIGHT */}
-
-                      <div>
-
-                        <div className='bg-black/30 rounded-2xl p-5 mb-5'>
-
-                          <h3 className='text-xl font-semibold mb-3'>
-                            Business Goals
-                          </h3>
-
-                          <p className='text-gray-300 whitespace-pre-line'>
-                            {lead.goals}
-                          </p>
-
-                        </div>
-
-                        {/* REMARK */}
-
-                        <textarea
-                          defaultValue={
-                            lead.remark || ''
-                          }
-                          placeholder='Add follow-up remark...'
-                          onBlur={(e) =>
-                            saveRemark(
-                              lead.id,
-                              e.target.value
-                            )
-                          }
-                          className='w-full h-32 bg-black/30 border border-white/10 rounded-2xl p-4 text-white outline-none'
-                        />
+                        <p>
+                          💰 {lead.budget}
+                        </p>
 
                       </div>
 
                     </div>
 
+                    {/* RIGHT */}
+
+                    <div>
+
+                      <div className='bg-black/30 rounded-2xl p-5 mb-5'>
+
+                        <h3 className='text-xl font-semibold mb-3'>
+                          Business Goals
+                        </h3>
+
+                        <p className='text-gray-300 whitespace-pre-line'>
+                          {lead.goals}
+                        </p>
+
+                      </div>
+
+                      {/* REMARK */}
+
+                      <textarea
+                        defaultValue={
+                          lead.remark || ''
+                        }
+                        placeholder='Add follow-up remark...'
+                        onBlur={(e) =>
+                          saveRemark(
+                            lead.id,
+                            e.target.value
+                          )
+                        }
+                        className='w-full h-32 bg-black/30 border border-white/10 rounded-2xl p-4 text-white outline-none'
+                      />
+
+                    </div>
+
                   </div>
 
-                ))}
+                </div>
 
-              </div>
+              ))}
 
             </div>
 
-          )
+          </div>
 
-        )
+        ))
 
       }
 
